@@ -2,44 +2,80 @@
 
 \begin{document}
 
-
-\title{Universal Association Discovery based on Functions of
-  Observation Graph, the good and the ugly}
-\numberofauthors{2}
-
-\author{
-  \alignauthor 
-  Hesen Peng \\
-  \affaddr{Locacy LLC}\\
-  \affaddr{6330 NE Radford Dr Apt 3727}\\
-  \affaddr{Seattle, Washington, USA 98115}\\
-  \email{hesen.peng@gmail.com}  
-  \alignauthor
-  Tianwei Yu\\
-  \affaddr{Dept of Biostatistics and Bioinformatics}\\
-  \affaddr{Emory University}\\
-  \affaddr{1518 Clifton Rd NE 3F}\\
-  \affaddr{Atlanta Georgia, USA 30322}\\
-  \email{tianwei.yu@emory.edu}
-}
-
-\date{\today{}}
-
-\maketitle
-
-\begin{abstract}
-  Here we start the Mira paper. 
-\end{abstract}
-
-\category{H.4}{Information Systems Applications}{Miscellaneous}
-\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
-
-\terms{Theory, Happy}
-
-\keywords{ACM proceedings, \LaTeX, text tagging}
+\input{author-info}
 
 \section{Introduction}
 \label{sec:intro}
+
+In this paper we would like to discuss emerging methods on the
+discovery of universal probablistic assocation between random vectors.
+Consider two random vectors $X$ and $Y$ and $n$ pairs of independent
+and indentically distributed (i.i.d.) random samples $\{X_i,
+Y_i\}_{i=1}^n$. We would like to draw inference for the existence
+between $X$ and $Y$ based on the $n$ pairs of samples. Classical
+association statistics like Pearson's correlation coefficient assume
+functional forms (linear, monotonicity) between $X$ and $Y$, which are
+judged as \emph{uncorrelated} if
+\begin{displaymath}
+  Corr(X,Y)=0
+\end{displaymath}
+Universal association statistic perceive associations from the level
+of probablistic dependence. That is, $X$ and $Y$ are judged as
+independent if and only if
+\begin{equation}
+  \label{eq:independence}
+  F(X,Y)= F(X) F(Y)
+\end{equation}
+where $F(\cdot)$ is the probability density function for the random
+vector under consideration. Probabblistic association as captured by
+universal association statistics encapsulates a larger group of
+associations than traditional correlation coefficient. For example,
+universal association would consider nonlinear interactions involving
+multiple variables. 
+
+We have noticed that multitude of methods on universal association
+discovery link to distance functions on the observation graph. The
+distance graph consists of nodes representing each observation $(X_i,
+Y_i)$ in the $p+q$ Euclidean space. Here $p$ and $q$ are the
+dimensions of $X$ and $Y$, respectively. Edges of the observation
+graph would connect two nodes (observations) if specific criteria is
+satisfied.
+
+For example, mutual information and its derivatives have been the most
+popular universal association statistic to date\cite{cite:my-cas-work,
+  citation:MINE-science, tostevin2009mutual}. To estimate mutual
+information, the joint entropy can be approximated using $K$-nearest
+neighbour distance \cite{PhysRevE.69.066138, leonenko2008,
+  doi:10.1080/104852504200026815}. Recent breakthrough on distance
+covariate \cite{székely2009, székely2007} sheds light on universal
+association discovery with its simplicity of form and theoretical
+flexibility. Brownian distance \cite{székely2009} covariate proposed
+\texttt{dCov} as
+\begin{equation*}
+  V_N^2 = \frac{1}{n^2}\sum_{k,l=1}^n D^{X}_{kl}D^{Y}_{kl}
+\end{equation*}
+where $D^{X}_{kl}$ and $D^{Y}_{kl}$ are simple linear functions of
+pairwise distances between sample elements calculated on $X$ and $Y$
+dimensions, respectively. In an independent research, the author
+proposed Mira score \cite{my-dissertation} as 
+\begin{equation*}
+  M = \sum_{k,l = 1}^n D^{(X,Y)}_{kl} w_{kl}
+\end{equation*}
+where $D^{(X,Y)}_{kl}$ is the distance between sample elements
+calculated using both $X$ and $Y$ dimensions, and $w_{kl}=1$ when the
+involved elements are nearest neighbors, $w_{kl}=0$ otherwise.
+
+In this article we will contribute: 
+\begin{enumerate}
+\item Point out that non-trial functions of the observation graph
+  would be capable of discoverying universal association.
+\item Present numerical comparison between existing methods.
+\end{enumerate}
+
+\section{Functions on the Observation Graph}
+\label{sec:funcs}
+
+
 
 \bibliographystyle{abbrv}
 \bibliography{mira-score}
