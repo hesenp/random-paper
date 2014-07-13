@@ -4,7 +4,7 @@
 
 library(mvtnorm)
 
-lin_sim <- function(n,p,rho){
+lin_sim <- function(n,p,rho=0.1){
   ## this function will generate a bunch of linear assocations between
   ## X and Y (multi-variate normal distribution). we'll see how that
   ## goes.
