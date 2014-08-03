@@ -1,5 +1,7 @@
 \documentclass{sig-alternate}
 
+\input{pre-amble}
+
 \begin{document}
 
 \input{author-info}
@@ -19,27 +21,28 @@ Euclidean space. However, general theory developed in this paper can
 be applied in other spaces as well.
 
 Classical association statistics like Pearson's correlation
-coefficient assume functional forms (linear, monotonicity) between $X$
-and $Y$, which are judged as \emph{uncorrelated} if
+coefficient assume functional forms (for example, piecewise linear,
+monotonicity) between $X$ and $Y$, which are judged as
+\emph{correlated} if
 \begin{displaymath}
-  Corr(X,Y)=0
+  Corr(X,Y) \ne 0
 \end{displaymath}
-Universal association statistic perceive associations from the level
-of probablistic dependence. That is, $X$ and $Y$ are judged as
-independent if and only if
+Probablistic association statistic, as the name suggests, perceives
+associations from the level of probablistic dependence. That is, $X$
+and $Y$ are judged as independent if and only if their joint
+probability density function can be factored
 \begin{equation}
   \label{eq:independence}
   F(X,Y)= F(X) F(Y)
 \end{equation}
 where $F(\cdot)$ is the probability density function for the random
-vector under consideration. Probabblistic association as captured by
-universal association statistics encapsulates a larger group of
-associations than traditional correlation coefficient. For example,
-universal association would consider nonlinear interactions involving
-multiple variables. 
+vector under consideration. Probabblistic association encapsulates a
+larger group of associations than traditional correlation coefficient.
+For example, probablistic association would consider nonlinear
+interactions involving multiple variables.
 
-We have noticed that multitude of methods on universal association
-discovery link to distance functions on the observation graph. The
+We have noticed multiple of methods on probablistic association
+discovery linked to functions on the observation distance graph. The
 distance graph consists of nodes representing each observation $(X_i,
 Y_i)$ in the $p+q$ Euclidean space. Here $p$ and $q$ are the
 dimensions of $X$ and $Y$, respectively. Edges of the observation
@@ -47,38 +50,166 @@ graph would connect two nodes (observations) if specific criteria is
 satisfied.
 
 For example, mutual information and its derivatives have been the most
-popular universal association statistic to date\cite{cite:my-cas-work,
-  citation:MINE-science, tostevin2009mutual}. To estimate mutual
-information, the joint entropy can be approximated using $K$-nearest
-neighbour distance \cite{PhysRevE.69.066138, leonenko2008,
-  doi:10.1080/104852504200026815}. Recent breakthrough on distance
-covariate \cite{székely2009, székely2007} sheds light on universal
-association discovery with its simplicity of form and theoretical
-flexibility. Brownian distance \cite{székely2009} covariate proposed
-\texttt{dCov} as
+popular probablistic association statistic to
+date\cite{cite:my-cas-work, citation:MINE-science,
+  tostevin2009mutual}. To estimate mutual information, the joint
+entropy can be approximated using $K$-nearest neighbour distance
+averaged for each observation \cite{PhysRevE.69.066138, leonenko2008,
+  doi:10.1080/104852504200026815}.
+
+Recent breakthrough on distance covariate \cite{székely2009,
+  székely2007} sheds light on universal association discovery with
+its simplicity of form and theoretical flexibility. Brownian distance
+\cite{székely2009} covariate proposed \texttt{dCov} as
 \begin{equation*}
   V_N^2 = \frac{1}{n^2}\sum_{k,l=1}^n D^{X}_{kl}D^{Y}_{kl}
 \end{equation*}
 where $D^{X}_{kl}$ and $D^{Y}_{kl}$ are simple linear functions of
 pairwise distances between sample elements calculated on $X$ and $Y$
-dimensions, respectively. In an independent research, the author
-proposed Mira score \cite{my-dissertation} as 
+dimensions, respectively. Given fixed marginal distribution for $X$
+and $Y$, large Brownian distance covariate suggests the existence
+of probablistic association. 
+
+In an independent research, the authors proposed Mira score
+\cite{my-dissertation} as
 \begin{equation*}
   M = \sum_{k,l = 1}^n D^{(X,Y)}_{kl} w_{kl}
 \end{equation*}
 where $D^{(X,Y)}_{kl}$ is the distance between sample elements
 calculated using both $X$ and $Y$ dimensions, and $w_{kl}=1$ when the
-involved elements are nearest neighbors, $w_{kl}=0$ otherwise.
+involved elements are nearest neighbors, $w_{kl}=0$ otherwise. Given
+fixed marginal distribution for $X$ and $Y$, small Mira score suggests
+the existence of probablistic association. 
 
-In this article we will contribute: 
+We would like to discuss the property of functions applied to the
+distances of the observation graph. The discussion of the section
+below is inspired by comparing mean observation distance between
+dependent and independent random vectors of the same marginal
+distribution. Our intution suggest that when two random vectors are
+probablistically associated, their observation distances tend to be
+smaller than their independent counterparts.
+
+Take Figure \ref{fig:comparison} for example, both plots show 300
+samples from two bivariate random vectors. Observations on the left
+panel are sampled from independent bivariate normal distributions.
+Observations on the right panel are sampled from mixture bivariate
+normal distribution with $\pm 0.8$ covariates. Coincidentally, both
+distributions have standard normal mariginal distribution and zero
+coerrelation coefficient. However, the two samples differ on a group
+of metrics defined on the observation distances. Table
+\ref{tab:example-compare} shows the mean distance, mean nearest
+neighbour distance, and mean log-nearest neighbour distance are all
+smaller for the dependent case compared with independent case. We have
+repeated the simulation multiple times and the same trend is observed
+in large probability.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=.5\textwidth,height=.25\textwidth]{../code/visualize/plot/example-1.eps}
+  \caption{Random samples generated from independent bivariate normal
+    distribution (left), and mixture bivariate normal distribution
+    with $\pm 0.8$ covariates (right). The dashed lines connects two
+    observations if they are nearest neighbours.}
+  \label{fig:comparison}
+\end{figure}
+
+% latex table generated in R 3.0.2 by xtable 1.7-3 package
+% Fri Aug  1 16:43:52 2014
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{lrr}
+    \hline
+    Metric & Left (Ind) & Right (Mix. Normal) \\ 
+    \hline
+    mean distance & 1.81 & 1.70 \\ 
+    mean NN & 0.14 & 0.12 \\ 
+    mean $\log(\textrm{NN})$ & -2.24 & -2.43 \\ 
+    \hline
+  \end{tabular}
+  \caption{Comparison between the independent bivariate normal
+    distribution and mixture normal distribution in Figure
+    \ref{fig:comparison}.  Statistics used in the comparison include
+    mean observation distance, mean nearest neighbour distance, mean
+    log-nearest neighbour distance. }
+  \label{tab:example-compare}
+\end{table}
+
+The above observation is no coincidence. In this article we will
+generalize the functions on the observation graph, discuss their
+properties in identifying probablistic associations. More
+specifically, we will contribute:
 \begin{enumerate}
-\item Point out that non-trial functions of the observation graph
-  would be capable of discoverying universal association.
+\item Point out that non-trial monotonic functions of the observation
+  graph would be capable of discoverying universal association.
 \item Present numerical comparison between existing methods.
 \end{enumerate}
+For illustration purpose we applied the proposed methods to the
+association identication in image analysis and text mining. The
+results are very interesting.
 
-\section{Functions on the Observation Graph}
+\section{Theory}
 \label{sec:funcs}
+
+% Given $n$ pairs of random samples $\{X_{i},Y_{i}\}_{i=1}^n$, we are
+% interested in inferring the existence of probablistic association
+% between these two random vectors. Denote the observation distance as
+% $D=(d_{ij})_{n\times n}$, where $d_{ij}$ is the Euclidean distance
+% between the $i$ and $j$-th observation calculated using both $X$ and
+% $Y$ dimensions. That is
+% \begin{displaymath}
+%   d_{ij} = \sqrt{\sum_{l = 1}^p (X_{il} - X_{jl})^2 + \sum_{k = 1}^q (Y_{ik} - Y_{jk})^2}
+% \end{displaymath}
+% In the mean time, consider a parallel pair of random vectors $(X^0,
+% Y^0)$, where $X^0$ and $Y^0$ share the identical marginal distribution
+% as $X$ and $Y$, respectively. The only difference is that the random
+% vectors $X^0$ and $Y^0$ are independent of each other. When we take
+% $n$ pairs of independent samples from $(X^0, Y^0)$ 
+
+We are interested in testing the existence of probablistic association
+between two random vectors $(X,Y)$ given $n$ pairs of observations.
+Consider another pair of random vectors $(X^0, Y^0)$, where $X$ and
+$X^0$, $Y$ and $Y^0$ are of the same distribution. The only difference
+is that $X^0$ and $Y^0$ are independent. As mentioned above, we would
+like to compare the sample observation distance from $(X,Y)$ against
+that from $(X^0,Y^0)$. 
+
+\begin{theorem}
+  \label{theorem:1}
+  Denote the distance between two independent samples from $(X,Y)$ as
+  $d_{XY}$, and the distance between two independent samples from
+  $(X^0,Y^0)$ as $d_{X^0Y^0}$. Then we have 
+  \begin{displaymath}
+    E(d_{XY}) \le E(d_{X^0Y^0})
+  \end{displaymath}
+\end{theorem}
+
+
+
+
+
+%% here talk about the theory of observation points closer to each
+%% other.
+
+%% here talk about asymptotic property (normality). 
+
+%% here talk about the functions of these values using delta methods. 
+
+%% here talk about the nearest neighbour property. 
+
+\section{Numerical comparison}
+\label{sec:comparison}
+
+\section{Applications}
+\label{sec:haha}
+
+
+
+\appendix{}
+
+\section{Proof for Theorem \ref{theorem:1}}
+\label{sec:proof-1}
+
+
 
 
 
