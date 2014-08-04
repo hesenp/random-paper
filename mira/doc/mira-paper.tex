@@ -159,36 +159,39 @@ results are very interesting.
 % \begin{displaymath}
 %   d_{ij} = \sqrt{\sum_{l = 1}^p (X_{il} - X_{jl})^2 + \sum_{k = 1}^q (Y_{ik} - Y_{jk})^2}
 % \end{displaymath}
-% In the mean time, consider a parallel pair of random vectors $(X^0,
-% Y^0)$, where $X^0$ and $Y^0$ share the identical marginal distribution
+% In the mean time, consider a parallel pair of random vectors $(\hat{X},
+% \hat{Y})$, where $\hat{X}$ and $\hat{Y}$ share the identical marginal distribution
 % as $X$ and $Y$, respectively. The only difference is that the random
-% vectors $X^0$ and $Y^0$ are independent of each other. When we take
-% $n$ pairs of independent samples from $(X^0, Y^0)$ 
+% vectors $\hat{X}$ and $\hat{Y}$ are independent of each other. When we take
+% $n$ pairs of independent samples from $(\hat{X}, \hat{Y})$ 
 
 We are interested in testing the existence of probablistic association
-between two random vectors $(X,Y)$ given $n$ pairs of observations.
-Consider another pair of random vectors $(X^0, Y^0)$, where $X$ and
-$X^0$, $Y$ and $Y^0$ are of the same distribution. The only difference
-is that $X^0$ and $Y^0$ are independent. As mentioned above, we would
-like to compare the sample observation distance from $(X,Y)$ against
-that from $(X^0,Y^0)$. 
-
-\begin{theorem}
-  \label{theorem:1}
-  Denote the distance between two independent samples from $(X,Y)$ as
-  $d_{XY}$, and the distance between two independent samples from
-  $(X^0,Y^0)$ as $d_{X^0Y^0}$. Then we have 
+between two random vectors $(X,Y)$, given $n$ pairs of observations.
+Consider another pair of random vectors $(\hat{X}, \hat{Y})$, where
+$\hat{X}$ follows independent and identical distribution
+(\emph{i.i.d.}) as $X$ and $\hat{Y}$ follows \emph{i.i.d.} as $Y$. The
+only difference is that $\hat{X}$ and $\hat{Y}$ are mutually
+independent. As mentioned above, we would like to compare the sample
+observation distance from $(X,Y)$ against that from
+$(\hat{X},\hat{Y})$.
+\begin{thm}
+  \label{thm:1}
+  Denote the distance between two independent random samples from
+  $(X,Y)$ as $d_{XY}$, and the distance between two independent random
+  samples from $(\hat{X},\hat{Y})$ as $d_{\hat{X}\hat{Y}}$. Then we
+  have
   \begin{displaymath}
-    E(d_{XY}) \le E(d_{X^0Y^0})
+    E(d_{XY}) \le E(d_{\hat{X}\hat{Y}})
   \end{displaymath}
-\end{theorem}
+\end{thm}
+For the sake of space, proofs of the theoretical results in this
+section are presented in Appendix \ref{sec:proof}. Theorem \ref{thm:1}
+above confirms our earlier intuition: when two random vectors are
+probablistically associated, their observations tend to be closer
+compared with their independent counterparts. 
 
 
 
-
-
-%% here talk about the theory of observation points closer to each
-%% other.
 
 %% here talk about asymptotic property (normality). 
 
@@ -206,11 +209,54 @@ that from $(X^0,Y^0)$.
 
 \appendix{}
 
-\section{Proof for Theorem \ref{theorem:1}}
-\label{sec:proof-1}
+\section{Proof of Theorems}
+\label{sec:proof}
 
+\begin{proof}[Theorem \ref{thm:1}]
+  We would like to make the following definitions before proceeding:
+  \begin{itemize}
+  \item $(X', Y')$: follows \emph{i.i.d.} as $(X,Y)$
+  \item $(\hat{X},\hat{Y})$: $\hat{X}$ follows \iid{} as $X$;
+    $\hat{Y}$ follows \iid{} as $Y$. But $\hat{X}$ and $\hat{Y}$ are
+    independent. $(\hat{X},\hat{Y})$ is independent of all previously
+    defined random variables.
+  \item $(\hat{X}', \hat{Y}')$: follows \emph{i.i.d.} as
+    $(\hat{X},\hat{Y})$ and is independent of all the above random
+    variables.
+  \end{itemize}
+  Based on the abvoe definition, the distance between independent
+  random pairs of observations from $(X,Y)$ and its independent
+  counterpart $(\hat{X}, \hat{Y})$ can be expressed as: 
+  \begin{eqnarray*}
+    E(d_{XY}) & = & E(|(X,Y) - (X', Y')|_{p+q})\\
+    E(d_{\hat{X}\hat{Y}}) & = & E(|(\hat{X},\hat{Y}) - (\hat{X}', \hat{Y}')|_{p+q})\\
+  \end{eqnarray*}
+  Further more, based on Equation 2.5 of \cite{székely2007}, we have:
+  \begin{eqnarray*}
+    E(|(X,Y) - (X',Y')|_{p+q}) &=& \int_{R^{p+q}}
+    \frac{1-|f_{X,Y}(s,t)|^2}{C_{p+q}|(t,s)|_{p+q}^{1+p+q}} d(s,t)\\
+    E(|(\hat{X},\hat{Y}) - (\hat{X}',\hat{Y}')|_{p+q}) &=& \int_{R^{p+q}}
+    \frac{1-|f_{\hat{X},\hat{Y}}(s,t)|^2}{C_{p+q}|(t,s)|_{p+q}^{1+p+q}} d(s,t)\\
+  \end{eqnarray*}
+  where $f_{X,Y}(s,t)$ is the characteristics functions of $(X,Y)$;
+  $f_{\hat{X},\hat{Y}}(s,t)$ is the characteristics functions of
+  $(\hat{X},\hat{Y})$; $C_{p+q}$ is a constant defined in Equation 2.3
+  of \cite{székely2007}.
 
-
+  Meanwhile, the characteristics function of $(\hat{X}, \hat{Y})$ can
+  be factored because of their independence
+  \begin{displaymath}
+    f_{\hat{X},\hat{Y}}(s,t) = f_{\hat{X}}(s) f_{\hat{Y}}(t) 
+  \end{displaymath}
+  Summarizing the above, we have 
+  \begin{eqnarray*}
+    E(d_{XY} - d_{\hat{X}\hat{Y}})& =& \int_{R^{p+q}} \frac{|f_X(s)
+      f_Y(t)|^2 - |f_{XY}(s,t)|^2}{C_{p+q}|(t,s)|_{p+q}^{1+p+q}}
+    d(t,s)\\
+    &\ge & 0 
+  \end{eqnarray*}
+  according to Cauchy-Schwarz inequality. 
+\end{proof}
 
 
 \bibliographystyle{abbrv}
