@@ -12,8 +12,8 @@ scenarios$power <- apply(out, 1,
 
 trellis.device(device = "postscript",
                file = "sim-power-linear.eps",
-               width = 8,
-               height = 8,
+               width = 6,
+               height = 6,
                horizontal = FALSE,
                paper = "special")
 xyplot(power~n|association,
@@ -28,8 +28,8 @@ dev.off()
 
 trellis.device(device = "postscript",
                file = "sim-power-nonlinear.eps",
-               width = 12,
-               height = 8,
+               width = 10,
+               height = 6,
                horizontal = FALSE,
                paper = "special")
 xyplot(power~n|association,

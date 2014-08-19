@@ -7,7 +7,7 @@ source("util.r")
 
 library(lattice)
 library(doMC)
-registerDoMC(cores=3)
+registerDoMC(cores=16)
 
 scramble_rows <- function(data){
   ## this function will randomly permute the rows of the input data.
@@ -26,7 +26,7 @@ gen_association <- function(select){
 ## let's first see how things behave with linear models. we are gonna
 ## look at the power for linear models.
 
-R <- 3000
+R <- 1000
 
 scenarios <- scramble_rows(expand.grid(association = c("lin","var","cube"),
                                        method = c("mutual_information",
@@ -39,10 +39,24 @@ out <- foreach(i= 1:nrow(scenarios),
                .combine = rbind) %dopar% {
   replicate(R, {
     temp <- gen_association(scenarios[i,1])(scenarios[i,3], 5)
-    return(ccompare_test(temp$x,temp$y,type = scenarios[i,2]))
+    return(compare_test(temp$x,temp$y,type = scenarios[i,2]))
   })
 }
 
 save(out,scenarios,
      file="output/sim-p-value.RData")
 
+load("output/sim-p-value.RData")
+
+oo <- cbind(scenarios,
+            apply(out,1,
+                  function(x){
+                    sum(x<=0.05)/R
+                  }))
+names(oo)[4] <- "power"
+
+xyplot(power~n|association,
+       group=method,
+       data = oo,
+       auto.key=TRUE,
+       type="a")

@@ -1,0 +1,56 @@
+\begin{thebibliography}{1}
+
+\bibitem{doi:10.1080/104852504200026815}
+M.~N. Goria, N.~N. Leonenko, V.~V. Mergel, and P.~L. Novi~Inverardi.
+\newblock A new class of random vector entropy estimators and its applications
+  in testing statistical hypotheses.
+\newblock {\em Journal of Nonparametric Statistics}, 17(3):277--297, 2005.
+
+\bibitem{PhysRevE.69.066138}
+A.~Kraskov, H.~St\"ogbauer, and P.~Grassberger.
+\newblock Estimating mutual information.
+\newblock {\em Phys. Rev. E}, 69:066138, Jun 2004.
+
+\bibitem{leonenko2008}
+N.~Leonenko, L.~Pronzato, and V.~Savani.
+\newblock A class of rényi information estimators for multidimensional
+  densities.
+\newblock {\em The Annals of Statistics}, 36(5):2153--2182, 10 2008.
+
+\bibitem{cite:my-cas-work}
+C.~Nardini, L.~Wang, H.~Peng, L.~Benini, and M.~Kuo.
+\newblock Mm-correction: Meta-analysis-based multiple hypotheses correction in
+  omic studies.
+\newblock In A.~Fred, J.~Filipe, and H.~Gamboa, editors, {\em Biomedical
+  Engineering Systems and Technologies}, volume~25 of {\em Communications in
+  Computer and Information Science}, pages 242--255. Springer Berlin
+  Heidelberg, 2009.
+
+\bibitem{my-dissertation}
+H.~Peng.
+\newblock High-dimensional universal dependence discovery.
+\newblock {\em Emory University Laney Graduate School Dissertation}, 2012.
+
+\bibitem{citation:MINE-science}
+D.~N. Reshef, Y.~A. Reshef, H.~K. Finucane, S.~R. Grossman, G.~McVean, P.~J.
+  Turnbaugh, E.~S. Lander, M.~Mitzenmacher, and P.~C. Sabeti.
+\newblock Detecting novel associations in large data sets.
+\newblock {\em Science}, 334(6062):1518--1524, 2011.
+
+\bibitem{székely2009}
+G.~J. Székely and M.~L. Rizzo.
+\newblock Brownian distance covariance.
+\newblock {\em The Annals of Applied Statistics}, 3(4):1236--1265, 12 2009.
+
+\bibitem{székely2007}
+G.~J. Székely, M.~L. Rizzo, and N.~K. Bakirov.
+\newblock Measuring and testing dependence by correlation of distances.
+\newblock {\em The Annals of Statistics}, 35(6):2769--2794, 12 2007.
+
+\bibitem{tostevin2009mutual}
+F.~Tostevin and P.~R. Ten~Wolde.
+\newblock Mutual information between input and output trajectories of
+  biochemical networks.
+\newblock {\em Physical review letters}, 102(21):218101, 2009.
+
+\end{thebibliography}

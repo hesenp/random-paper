@@ -1,0 +1,45 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: mira-paper.aux
+The style file: abbrv.bst
+Database file #1: mira-score.bib
+You've used 9 entries,
+            2118 wiz_defined-function locations,
+            569 strings with 5629 characters,
+and the built_in function-call counts, 3564 in all, are:
+= -- 338
+> -- 197
+< -- 2
++ -- 78
+- -- 67
+* -- 304
+:= -- 603
+add.period$ -- 28
+call.type$ -- 9
+change.case$ -- 59
+chr.to.int$ -- 0
+cite$ -- 9
+duplicate$ -- 112
+empty$ -- 255
+format.name$ -- 67
+if$ -- 723
+int.to.chr$ -- 0
+int.to.str$ -- 9
+missing$ -- 9
+newline$ -- 48
+num.names$ -- 20
+pop$ -- 47
+preamble$ -- 1
+purify$ -- 50
+quote$ -- 0
+skip$ -- 76
+stack$ -- 0
+substring$ -- 252
+swap$ -- 20
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 36
+warning$ -- 0
+while$ -- 31
+width$ -- 10
+write$ -- 102
