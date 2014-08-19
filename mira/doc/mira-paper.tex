@@ -400,11 +400,14 @@ counterpart $\hat{X}$ and $\hat{Y}$.
 
 For illustrations, consider the following situation, $500$ random
 \iid{} random samples are generated from variance association
-distribution with $p=10$. In the mean time, $500$ random samples are
+distribution with $p=10$. For comparison, $500$ random samples are
 generated from independent random variable pairs of the same marginal
-distribution. Density plot of observation distances for each case are
-plotted in Figure \ref{fig:discussion-distance-distribution}. 
-
+distribution. Observation distances are calculated for each case,
+respectively. Density plot of observation distances for each case are
+plotted in Figure \ref{fig:discussion-distance-distribution}. We
+observe that the distribution of observation distance for samples from
+variance association distribution are visually different from the null
+distribution.
 \begin{figure}
   \centering
   \includegraphics[width=.25\textwidth,height=.25\textwidth]{../code/visualize/plot/distance-dist.eps}
@@ -413,7 +416,10 @@ plotted in Figure \ref{fig:discussion-distance-distribution}.
     and their independent counterparts (dashed line).}
   \label{fig:discussion-distance-distribution}
 \end{figure}
-
+In our upcoming work, we are proposing an omnibus probablistic
+association test based on the observation distance distribution. We
+would expect this test to be even more flexible compared with the
+methods compared in this paper. 
 
 \appendix{}
 

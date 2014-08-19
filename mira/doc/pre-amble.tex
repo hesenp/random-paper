@@ -1,5 +1,12 @@
 
 \usepackage{graphicx}
 
-\newcounter{theorems}
-\newtheorem{theorem}[theorems]{Theorem}
+\let\proof\relax 
+\let\endproof\relax
+\usepackage{amsthm}
+
+\newtheorem{thm}{Theorem}
+
+\newtheorem{cor}{Corollary}
+
+\newcommand{\iid}{\emph{i.i.d.}}
