@@ -61,3 +61,25 @@ find_association <- function(i,y){
 
 out <- mclapply(1:length(GO.select),
                 function(i) find_association(i,y))
+
+save(out,file="bio.RData")
+
+load("bio.RData")
+
+pp <- NULL
+for(i in 1:length(out)){
+  pp <- rbind(pp,out[[i]])
+}
+
+u <- as.data.frame(pp)
+names(u) <- c("Mutual_Information",
+               "Mira_Score",
+               "Mean_Distance",
+               "Brownian_Covariate")
+u$GO <- names(GO.select)
+
+write.csv(u,
+          file="go-p-values.csv",
+          row.names=FALSE)
+
+rownames(pp) <- names(GO.select)
