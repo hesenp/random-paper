@@ -9,6 +9,28 @@ library(energy)
 
 ## this part of the code generates the test using mutual information.
 
+###########################################
+## HOW TO USE:
+
+## use compare_test function to generate permutation test p-values
+## using one of the four methods: Mira score, mutual information, mean
+## observation distance, and brownian covariate.
+
+## for example:
+## x and y are matrices of 100*10 and 100*2 dimensions, respectively.
+# x <- matrix(rnorm(1000),100)
+# y <- matrix(rnorm(200),100)
+
+## to generate the p-values of Mira score, use:
+
+## compare_test(x,y,"mira_score")
+
+## for other methods, substitute "mira_score" with one of the
+## following: "mutual_information", "mean_distance", or
+## "brownian_covariate"
+#################################################
+
+
 dist_fun <- function(x,y,type){
   ## this function will return the values on the observation graph
   ## subject to the specification of the type field. current planned
