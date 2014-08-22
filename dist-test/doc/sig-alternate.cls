@@ -1,0 +1,1 @@
+../../mira/doc/sig-alternate.cls
