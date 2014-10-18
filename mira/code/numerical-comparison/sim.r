@@ -30,9 +30,10 @@ R <- 1000
 
 scenarios <- scramble_rows(expand.grid(association = c("lin","var","cube"),
                                        method = c("mutual_information",
-                                         "mira_score",
-                                         "mean_distance",
-                                         "brownian_covariate"),
+                                           "mira_score",
+                                           "mean_distance",
+                                           "brownian_covariate",
+                                           "ks"),
                                        n = seq(40,1000,by=20)))
 
 out <- foreach(i= 1:nrow(scenarios),
@@ -44,9 +45,9 @@ out <- foreach(i= 1:nrow(scenarios),
 }
 
 save(out,scenarios,
-     file="output/sim-p-value.RData")
+     file="output/sim-p-value-with-ks.RData")
 
-load("output/sim-p-value.RData")
+load("output/sim-p-value-with-ks.RData")
 
 oo <- cbind(scenarios,
             apply(out,1,

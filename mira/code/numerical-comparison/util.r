@@ -98,7 +98,6 @@ compare_test <- function(x,y,type,R=100){
 }
 
 ## test
-
 ## n <- 100
 ## p <- 5
 ## a <- matrix(rnorm(n*p),n)
