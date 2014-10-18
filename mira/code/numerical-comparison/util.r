@@ -62,13 +62,45 @@ perm_test <- function(x,y,type,R=100){
   return(pnorm(out$t0,mean(out$t),sd(out$t)))
 }
 
-compare_test <- function(x,y,type,R=100){
-  ## this function wraps the above operation with the dcov test in the
-  ## energy function.
-  if(type=="brownian_covariate"){
-    return(dcov.test(x,y)$p.value)
-  }else{
-    return(perm_test(x,y,type,R))
-  }
+## the function below would generate the distribution of observation
+## distance and do the association testing using kolgonorove test.
+
+dist_test_core <- function(x,y){
+    return(as.numeric(dist(cbind(x,y))))
 }
 
+dist_test <- function(x,y){
+    ## this function will generate the observation distances and use
+    ## KS test to compare it with null distribution.
+    
+    test_dist <- dist_test_core(x,y)
+    null_dist <- dist_test_core(x,y[sample(nrow(y)),])
+
+    return(ks.test(test_dist,null_dist)$p.value)    
+}
+
+## finally, test the performance with one general portal
+
+compare_test <- function(x,y,type,R=100){
+    ## this function wraps the above operation with the dcov test in the
+    ## energy function.
+
+    p_select <- pmatch(type,c("brownian_covariate",
+                              "ks_dist"))
+
+    out <- switch(p_select,
+                  dcov.test(x,y)$p.value,
+                  dist_test(x,y))
+    if(is.null(out)){
+        out <- perm_test(x,y,type,R)
+    }
+    return(out)
+}
+
+## test
+
+## n <- 100
+## p <- 5
+## a <- matrix(rnorm(n*p),n)
+## b <- matrix(rnorm(n*p,sd=abs(a)),n)
+## compare_test(a,b,"ks")
