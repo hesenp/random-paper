@@ -1,0 +1,69 @@
+
+R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+R是自由软件，不带任何担保。
+在某些条件下你可以将其自由散布。
+用'license()'或'licence()'来看散布的详细条件。
+
+R是个合作计划，有许多人为之做出了贡献.
+用'contributors()'来看合作者的详细情况
+用'citation()'会告诉你如何在出版物中正确地引用R或R程序包。
+
+用'demo()'来看一些示范程序，用'help()'来阅读在线帮助文件，或
+用'help.start()'通过HTML浏览器来看帮助文件。
+用'q()'退出R.
+
+> 
+> library(lattice)
+> 
+> load("output/sim-p-value-with-ks.RData")
+> 
+> power <- 0.05
+> 
+> scenarios$power <- apply(out, 1,
++                          function(x){
++                            sum(x<power)
++                          })/ncol(out)
+> 
+> trellis.device(device = "postscript",
++                file = "sim-power-linear-ks.eps",
++                width = 6,
++                height = 6,
++                horizontal = FALSE,
++                paper = "special")
+> xyplot(power~n|association,
++        group = method,
++        data = scenarios,
++        type = "a",
++        auto.key=list(space = "bottom",points=FALSE, lines=TRUE, columns=2),
++        xlab = "Sample Size",
++        ylab = "Power",
++        subset = scenarios == "lin")
+> dev.off()
+null device 
+          1 
+> 
+> trellis.device(device = "postscript",
++                file = "sim-power-nonlinear-ks.eps",
++                width = 10,
++                height = 6,
++                horizontal = FALSE,
++                paper = "special")
+> xyplot(power~n|association,
++        group = method,
++        data = scenarios,
++        type = "a",
++        auto.key=list(space = "bottom",points=FALSE, lines=TRUE, columns=4),
++        layout = c(2,1),
++        xlab = "Sample Size",
++        ylab = "Power",
++        subset = scenarios != "lin" & n<=700)
+> dev.off()
+null device 
+          1 
+> 
+> proc.time()
+ 用户  系统  流逝 
+0.733 0.054 0.834 
