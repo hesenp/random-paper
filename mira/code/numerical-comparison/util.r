@@ -69,12 +69,14 @@ dist_test_core <- function(x,y){
     return(as.numeric(dist(cbind(x,y))))
 }
 
-dist_test <- function(x,y){
+dist_test <- function(x,y,R=50){
     ## this function will generate the observation distances and use
     ## KS test to compare it with null distribution.
     
     test_dist <- dist_test_core(x,y)
-    null_dist <- dist_test_core(x,y[sample(nrow(y)),])
+    null_dist <- as.numeric(replicate(R,
+                                      dist_test_core(x,
+                                                     y[sample(nrow(y)),])))
 
     return(ks.test(test_dist,null_dist)$p.value)    
 }
@@ -97,7 +99,7 @@ compare_test <- function(x,y,type,R=100){
     return(out)
 }
 
-## test
+## ## test
 ## n <- 100
 ## p <- 5
 ## a <- matrix(rnorm(n*p),n)
