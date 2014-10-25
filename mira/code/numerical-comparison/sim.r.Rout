@@ -1,7 +1,7 @@
 
-R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
-Copyright (C) 2013 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-unknown-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -16,8 +16,6 @@ Type 'contributors()' for more information and
 Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
-
-[Previously saved workspace restored]
 
 > 
 > ## this program will make use of the functions specified in util.r and
@@ -38,7 +36,7 @@ The following object is masked from ‘package:boot’:
 Loading required package: foreach
 Loading required package: iterators
 Loading required package: parallel
-> registerDoMC(cores=16)
+> registerDoMC(cores=32)
 > 
 > scramble_rows <- function(data){
 +   ## this function will randomly permute the rows of the input data.
@@ -61,9 +59,10 @@ Loading required package: parallel
 > 
 > scenarios <- scramble_rows(expand.grid(association = c("lin","var","cube"),
 +                                        method = c("mutual_information",
-+                                          "mira_score",
-+                                          "mean_distance",
-+                                          "brownian_covariate"),
++                                            "mira_score",
++                                            "mean_distance",
++                                            "brownian_covariate",
++                                            "ks"),
 +                                        n = seq(40,1000,by=20)))
 > 
 > out <- foreach(i= 1:nrow(scenarios),
@@ -75,9 +74,23 @@ Loading required package: parallel
 + }
 > 
 > save(out,scenarios,
-+      file="output/sim-p-value.RData")
++      file="output/sim-p-value-with-ks.RData")
 > 
+> load("output/sim-p-value-with-ks.RData")
+> 
+> oo <- cbind(scenarios,
++             apply(out,1,
++                   function(x){
++                     sum(x<=0.05)/R
++                   }))
+> names(oo)[4] <- "power"
+> 
+> xyplot(power~n|association,
++        group=method,
++        data = oo,
++        auto.key=TRUE,
++        type="a")
 > 
 > proc.time()
       user     system    elapsed 
-652906.966   2359.369  64722.061 
+3913009.44   57835.81  227654.00 

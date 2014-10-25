@@ -7,7 +7,7 @@ source("util.r")
 
 library(lattice)
 library(doMC)
-registerDoMC(cores=16)
+registerDoMC(cores=32)
 
 scramble_rows <- function(data){
   ## this function will randomly permute the rows of the input data.
