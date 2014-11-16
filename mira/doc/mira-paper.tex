@@ -186,7 +186,7 @@ $(\hat{X},\hat{Y})$.
   \end{displaymath}
 \end{thm}
 For the sake of space, proofs of the theoretical results in this
-section are presented in Appendix \ref{sec:proof}. Theorem \ref{thm:1}
+section are presented in appendix. Theorem \ref{thm:1}
 above confirms our earlier intuition: when two random vectors are
 probablistically associated, their observations tend to be closer
 compared with their independent counterparts. 
@@ -236,14 +236,15 @@ observation distances for each observation. We have
   and the average of the transformed distances $\tilde{d}$ follow
   asymptotic normal distribution.
 \end{cor}
-From here we can see that when $g$ is the minimum function, Mira
-score, calculated as the mean nearest neighbour observation distance,
-is a special case of $\tilde{d}$. When $g$ is generating the mean of
-the smallest $K$ elements, $\tilde{d}$ is equivalent to mean
-$K$-nearest neighbour edge sum. When $g$ is generating the mean of
-log-transformed smallest $K$ elements, $\tilde{d}$ is equivalent to
-linear transformation of entropy estimates, which translates to
-association discovery using mutual information. 
+The above Corollary can be proved with delta methods. From here we can
+see that when $g$ is the minimum function, Mira score, calculated as
+the mean nearest neighbour observation distance, is a special case of
+$\tilde{d}$. When $g$ is generating the mean of the smallest $K$
+elements, $\tilde{d}$ is equivalent to mean $K$-nearest neighbour edge
+sum. When $g$ is generating the mean of log-transformed smallest $K$
+elements, $\tilde{d}$ is equivalent to linear transformation of
+entropy estimates, which translates to association discovery using
+mutual information.
 
 \section{Association Detection}
 \label{sec:comparison}
@@ -421,60 +422,7 @@ association test based on the observation distance distribution. We
 would expect this test to be even more flexible compared with the
 methods compared in this paper. 
 
-\appendix{}
-
-\section{Proof of Theorems}
-\label{sec:proof}
-
-\begin{proof}[Theorem \ref{thm:1}]
-  We would like to make the following definitions before proceeding:
-  \begin{itemize}
-  \item $(X', Y')$: follows \emph{i.i.d.} as $(X,Y)$
-  \item $(\hat{X},\hat{Y})$: $\hat{X}$ follows \iid{} as $X$;
-    $\hat{Y}$ follows \iid{} as $Y$. But $\hat{X}$ and $\hat{Y}$ are
-    independent. $(\hat{X},\hat{Y})$ is independent of all previously
-    defined random variables.
-  \item $(\hat{X}', \hat{Y}')$: follows \emph{i.i.d.} as
-    $(\hat{X},\hat{Y})$ and is independent of all the above random
-    variables.
-  \end{itemize}
-  Based on the abvoe definition, the distance between independent
-  random pairs of observations from $(X,Y)$ and its independent
-  counterpart $(\hat{X}, \hat{Y})$ can be expressed as: 
-  \begin{eqnarray*}
-    E(d_{XY}) & = & E(|(X,Y) - (X', Y')|_{p+q})\\
-    E(d_{\hat{X}\hat{Y}}) & = & E(|(\hat{X},\hat{Y}) - (\hat{X}', \hat{Y}')|_{p+q})\\
-  \end{eqnarray*}
-  Further more, based on Equation 2.5 of \cite{székely2007}, we have:
-  \begin{eqnarray*}
-    E(|(X,Y) - (X',Y')|_{p+q}) &=& \int_{R^{p+q}}
-    \frac{1-|f_{X,Y}(s,t)|^2}{C_{p+q}|(t,s)|_{p+q}^{1+p+q}} d(s,t)\\
-    E(|(\hat{X},\hat{Y}) - (\hat{X}',\hat{Y}')|_{p+q}) &=& \int_{R^{p+q}}
-    \frac{1-|f_{\hat{X},\hat{Y}}(s,t)|^2}{C_{p+q}|(t,s)|_{p+q}^{1+p+q}} d(s,t)\\
-  \end{eqnarray*}
-  where $f_{X,Y}(s,t)$ is the characteristics functions of $(X,Y)$;
-  $f_{\hat{X},\hat{Y}}(s,t)$ is the characteristics functions of
-  $(\hat{X},\hat{Y})$; $C_{p+q}$ is a constant defined in Equation 2.3
-  of \cite{székely2007}.
-
-  Meanwhile, the characteristics function of $(\hat{X}, \hat{Y})$ can
-  be factored because of their independence
-  \begin{displaymath}
-    f_{\hat{X},\hat{Y}}(s,t) = f_{\hat{X}}(s) f_{\hat{Y}}(t) 
-  \end{displaymath}
-  Summarizing the above, we have 
-  \begin{eqnarray*}
-    E(d_{XY} - d_{\hat{X}\hat{Y}})& =& \int_{R^{p+q}} \frac{|f_X(s)|^2
-      |f_Y(t)|^2 - |f_{XY}(s,t)|^2}{C_{p+q}|(t,s)|_{p+q}^{1+p+q}}
-    d(t,s)\\
-    &\le & 0 
-  \end{eqnarray*}
-  according to Cauchy-Schwarz inequality. 
-\end{proof}
-
-
 \bibliographystyle{abbrv}
 \bibliography{mira-score}
-
 
 \end{document}

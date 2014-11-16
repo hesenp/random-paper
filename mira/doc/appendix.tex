@@ -1,0 +1,69 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+
+\let\proof\relax 
+\let\endproof\relax
+\usepackage{amsthm}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newcommand{\iid}{\emph{i.i.d.}}
+\usepackage{fancyhdr}
+
+
+\begin{document}
+
+\section{Proof of Theorems}
+\label{sec:proof}
+
+\begin{proof}[Theorem 1]
+  We would like to make the following definitions before proceeding:
+  \begin{itemize}
+  \item $(X', Y')$: follows \emph{i.i.d.} as $(X,Y)$
+  \item $(\hat{X},\hat{Y})$: $\hat{X}$ follows \iid{} as $X$;
+    $\hat{Y}$ follows \iid{} as $Y$. But $\hat{X}$ and $\hat{Y}$ are
+    independent. $(\hat{X},\hat{Y})$ is independent of all previously
+    defined random variables.
+  \item $(\hat{X}', \hat{Y}')$: follows \emph{i.i.d.} as
+    $(\hat{X},\hat{Y})$ and is independent of all the above random
+    variables.
+  \end{itemize}
+  Based on the abvoe definition, the distance between independent
+  random pairs of observations from $(X,Y)$ and its independent
+  counterpart $(\hat{X}, \hat{Y})$ can be expressed as: 
+  \begin{eqnarray*}
+    E(d_{XY}) & = & E(|(X,Y) - (X', Y')|_{p+q})\\
+    E(d_{\hat{X}\hat{Y}}) & = & E(|(\hat{X},\hat{Y}) - (\hat{X}', \hat{Y}')|_{p+q})\\
+  \end{eqnarray*}
+  Further more, based on Equation 2.5 of \cite{székely2007}, we have:
+  \begin{eqnarray*}
+    E(|(X,Y) - (X',Y')|_{p+q}) &=& \int_{R^{p+q}}
+    \frac{1-|f_{X,Y}(s,t)|^2}{C_{p+q}|(t,s)|_{p+q}^{1+p+q}} d(s,t)\\
+    E(|(\hat{X},\hat{Y}) - (\hat{X}',\hat{Y}')|_{p+q}) &=& \int_{R^{p+q}}
+    \frac{1-|f_{\hat{X},\hat{Y}}(s,t)|^2}{C_{p+q}|(t,s)|_{p+q}^{1+p+q}} d(s,t)\\
+  \end{eqnarray*}
+  where $f_{X,Y}(s,t)$ is the characteristics functions of $(X,Y)$;
+  $f_{\hat{X},\hat{Y}}(s,t)$ is the characteristics functions of
+  $(\hat{X},\hat{Y})$; $C_{p+q}$ is a constant defined in Equation 2.3
+  of \cite{székely2007}.
+
+  Meanwhile, the characteristics function of $(\hat{X}, \hat{Y})$ can
+  be factored because of their independence
+  \begin{displaymath}
+    f_{\hat{X},\hat{Y}}(s,t) = f_{\hat{X}}(s) f_{\hat{Y}}(t) 
+  \end{displaymath}
+  Summarizing the above, we have 
+  \begin{eqnarray*}
+    E(d_{XY} - d_{\hat{X}\hat{Y}})& =& \int_{R^{p+q}} \frac{|f_X(s)|^2
+      |f_Y(t)|^2 - |f_{XY}(s,t)|^2}{C_{p+q}|(t,s)|_{p+q}^{1+p+q}}
+    d(t,s)\\
+    &\le & 0 
+  \end{eqnarray*}
+  according to Cauchy-Schwarz inequality. 
+\end{proof}
+
+\bibliographystyle{abbrv}
+\bibliography{mira-score}
+
+\end{document}
+
