@@ -1,0 +1,143 @@
+\documentclass[12pt,letterpaper]{article}
+
+\usepackage{url}
+\usepackage{natbib}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsthm}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+
+
+\begin{document}
+
+\bibliographystyle{authordate2}
+
+\title{Generalized Distand Association} 
+\author{Hesen Peng \and Tianwei Yu}
+\date{Draft: \today{}} 
+\maketitle{}
+
+Given two random vectors $X$ and $Y$, we are interested in testing
+their probablistic association given $n$ pairs of independent and
+identically distributed random samples $\{(X_i, Y_i)\}_{i=1}^n$.
+\cite{cite:10.1371/journal.pone.0124620} proposed Mean Distance
+Association (MeDiA), a set of probablistic association statistics as
+functions of observation distances. The theoretical foundation of
+MeDiA relies upon the result below: 
+
+\begin{thm}
+  \label{thm:1} 
+  (from \cite{cite:10.1371/journal.pone.0124620}) Denote the distance
+  between two independent random samples from $(X,Y)$ as $d_{XY}$, and
+  the distance between two dependent random samples from
+  $(\hat{X},\hat{Y})$ as $d_{\hat{X}\hat{Y}}$. Then we have
+  \begin{displaymath}
+    E(d_{XY}) \ge E(d_{\hat{X}\hat{Y}})
+  \end{displaymath}
+\end{thm}
+
+In this paper, we would like to expand the theory above to general
+functions on the observation graph. The generalized mean distance
+would encompass a number of existing methods, like mutual
+information. Besides, the generalized mean distance naturally leads to
+the construction of several other probabilistic association
+statistics.
+
+\begin{thm}
+  \label{thm:2}
+  (univariate $g$-transformation) Using the same notation, denote a
+  monotonically increasing continuously differentiable function
+  $g(\cdot)$. Denote the $g$-transformed distance as
+  \begin{eqnarray*}
+    \tilde{d}_{XY} &=& g(d_{XY})\\
+    \tilde{d}_{\hat{X}\hat{Y}} &=& g(d_{\hat{X}\hat{Y}})
+  \end{eqnarray*}
+  Then we have:
+  \begin{displaymath}
+    E(\tilde{d}_{XY}) \ge E(\tilde{d}_{\hat{X}\hat{Y}})
+  \end{displaymath}
+  and the average of the transformed distances $\tilde{d}$ follow
+  asymptotic normal distribution.
+\end{thm}
+
+\begin{proof}
+  The proof follows directly from delta method. More specifically, for
+  given $d_{\hat{X}\hat{Y}}$ and $d_{XY}$, there exists $d_{XY}'$, such that: 
+  \begin{eqnarray*}
+    \tilde{d}_{\hat{X}\hat{Y}} &=& g(d_{\hat{X}\hat{Y}})\\
+                               &=& g
+                                   \left[
+                                   (d_{\hat{X}\hat{Y}} - d_{XY}) + d_{XY}
+                                   \right] \\
+                               &=& g(d_{XY}) + g'(d_{XY}') (d_{\hat{X}\hat{Y}} - d_{XY})\\
+                               &=& \tilde{d}_{XY} + g'(d_{XY}') (d_{\hat{X}\hat{Y}} - d_{XY})
+  \end{eqnarray*}
+  Following Theorem \ref{thm:1}, taking expectation on both sides, and
+  realizing that $g'(\cdot) \ge 0$, we conclude the proof.
+\end{proof}
+
+Following Theorem \ref{thm:2}, we can see that distance based mutual
+information statistic $MI = \sum \log(d_{ij})$ actually falls into the
+generalized mean distance family.
+
+However, it would be helpful to realize that Theorem 2 has not yet
+encompass functions on the observation graph that give different
+weigths depending on the value. We would make this up with the results below: 
+
+\begin{thm}
+  \label{thm:3}
+  (Multivariate $f$-transformation) Using the same notation as above,
+  $n$-variate function $f$ is monotonically increasing on every
+  dimension of input. Define
+  \begin{eqnarray*}
+    \bar{d}_{XY} &=& f(d^{XY}_{i1},\ldots,d^{XY}_{in})\\ 
+    \bar{d}_{\hat{X}\hat{Y}} &=& f(d^{\hat{X}\hat{Y}}_{i1},\ldots,d^{\hat{X}\hat{Y}}_{in})\\
+  \end{eqnarray*}
+  Then we have:
+  \begin{displaymath}
+    E(\bar{d}_{XY}) \ge E(\bar{d}_{\hat{X}\hat{Y}})
+  \end{displaymath}
+\end{thm}
+
+\begin{proof}
+  When $f$ is monotonically increasing and continuously
+  differentiable, the proof to Theorem \ref{thm:3} is straight forward
+  and similar to the proof to Theorem \ref{thm:2} usin delta method.
+
+  In addition, when $f$ is monotonically increasing but not
+  continously differentiable, there exists a sequence of monotonically
+  increasing and continuously differentiable functions
+  $\{f_i(\cdot)\}_{i=1}^{+\infty}$, such that
+  
+  \begin{equation}
+    \lim_{i \to \infty} ||f_i - f||_{d_{XY}} \to 0
+  \end{equation}
+
+  Define 
+  \begin{eqnarray*}
+    \bar{d}^{i}_{XY} &=& f_i(d^{XY}_{i1},\ldots,d^{XY}_{in})\\ 
+    \bar{d}^{i}_{\hat{X}\hat{Y}} &=& f_i(d^{\hat{X}\hat{Y}}_{i1},\ldots,d^{\hat{X}\hat{Y}}_{in})\\
+  \end{eqnarray*}
+  Then for each $i$, we have:
+  \begin{displaymath}
+    E(\bar{d}^i_{XY}) \ge E(\bar{d}^i_{\hat{X}\hat{Y}})
+  \end{displaymath}
+
+  Summing the results above, we have 
+  \begin{equation}
+    E(\bar{d}_{XY}) \ge E(\bar{d}_{\hat{X}\hat{Y}})
+  \end{equation}
+\end{proof}
+
+Theorem \ref{thm:3} shows that $k$-nearest neighbour edge sum as
+defined in Mira score, and $k$-nearest neighbour log edge sum as
+defined in Mutual Information, also falls into this category and can
+be used to identify random vector associations. 
+
+
+
+\bibliography{gen-media}
+
+\end{document}
